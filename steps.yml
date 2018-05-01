@@ -1,0 +1,13 @@
+step:
+  process:
+    process_type: 'interpolated-script-cmd'
+    script: |
+      echo {message} > {outputfile}
+      cat {inputfile} | tr [:lower:] [:upper:] >> {outputfile}
+  publisher:
+    publisher_type: 'frompar-pub'
+    outputmap:
+      outputfile: outputfile
+  environment:
+    environment_type: 'docker-encapsulated'
+    image: busybox

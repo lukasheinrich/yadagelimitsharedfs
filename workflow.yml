@@ -1,0 +1,19 @@
+stages:
+- name: first_stage
+  dependencies: []
+  scheduler:
+    scheduler_type: singlestep-stage
+    parameters:
+      message: "a new dawn"
+      inputfile:  {$type: File, path: '{global_share}/public0001.dat'}
+      outputfile: {$type: File, local_path: '{workdir}/outputfile.txt'}
+    step: {$ref: 'steps.yml#/step'}
+- name: second_state
+  dependencies: [first_stage]
+  scheduler:
+    scheduler_type: singlestep-stage
+    parameters:
+      message: "with a new message"
+      inputfile:  {stages: first_stage, output: outputfile, unwrap: true}
+      outputfile: {$type: File, local_path: '{workdir}/outputfile.txt'}
+    step: {$ref: 'steps.yml#/step'}
