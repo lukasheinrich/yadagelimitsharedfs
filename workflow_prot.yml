@@ -5,7 +5,7 @@ stages:
     scheduler_type: singlestep-stage
     parameters:
       message: "a new dawn"
-      inputfile:  'global:///public0001.dat'
+      inputfile:  'global://public0001.dat'
       outputfile: 'local://{workdir}/outputfile.txt'
     step: {$ref: 'steps.yml#/step'}
 - name: second_state
